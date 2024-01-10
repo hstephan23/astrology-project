@@ -18,6 +18,18 @@ fetch(gifURL)
     console.log(data)
 })
 
+/* search button (event listener)
+
+
+
+*/
+
+/* modal buttons (for loop - event listener)
+
+
+
+*/
+
 /* Horoscope API
 
 
