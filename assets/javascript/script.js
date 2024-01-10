@@ -1,16 +1,10 @@
-let sign = "libra";
-let date = "tomorrow";
-const horoscopeURL = `https://horoscope-app-api.vercel.app/api/v1/get-horoscope/daily?sign=${sign}&day=${date}`;
-
 let sign_search = "libra%20zodiac%20sign";
 let offset = 1;
 const gifURL = `https://api.giphy.com/v1/gifs/search?api_key=PBjbldrcJfkATLfhbj07XguuikPsv0qv&q=${sign_search}&limit=1&offset=${offset}&rating=g`;
 
-fetch(horoscopeURL)
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-    });
+
+
+
 
 fetch(gifURL)
     .then(response => response.json())
@@ -70,12 +64,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
 */
 
-/* Horoscope API
+/* Horoscope API */
+// Event listener for the "Save changes" button in the modal
 
+  document.querySelector('.modal-card-foot .is-success').addEventListener('click', () => {
 
+    const selectedSign = document.querySelector('#horoscope-modal select[name="zodiac-sign"]').value; 
+    console.log(selectedSign) 
+    const selectedDay = document.querySelector('#horoscope-modal select[name="day"]').value;
+    console.log(selectedDay)
+    const selectedTimeFrame = document.querySelector('#horoscope-modal select[name="time-frame"]').value;
+    console.log(selectedTimeFrame)
+    const horoscopeURL = `https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${selectedTimeFrame}?sign=${selectedSign}&day=${selectedDay}`;
+    const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
 
-/*
+    fetch(corsProxyUrl + horoscopeURL)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+// fetch(horoscopeURL)
+//     .then(response => response.json())
+//     .then(data => {
+//         console.log(data)
+//     });
+    
+  });
 
+    
+
+  
 /* GIPHY API
 
 
