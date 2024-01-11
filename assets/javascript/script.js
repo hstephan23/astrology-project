@@ -1,17 +1,9 @@
 let selectedSign;
 
-
 function startApplication() {
-    // const offset = 1;
     selectedSign = document.querySelector('#horoscope-modal select[name="zodiac-sign"]').value;
-    // console.log(selectedSign) 
     const selectedDay = document.querySelector('#horoscope-modal select[name="day"]').value;
-    // console.log(selectedDay)
     const selectedTimeFrame = document.querySelector('#horoscope-modal select[name="time-frame"]').value;
-    // console.log(selectedTimeFrame)
-    // const horoscopeURL = `https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${selectedTimeFrame}?sign=${selectedSign}&day=${selectedDay}`;
-    // const gifURL = `https://api.giphy.com/v1/gifs/search?api_key=PBjbldrcJfkATLfhbj07XguuikPsv0qv&q=${selectedSign}&limit=1&offset=${offset}&rating=g`;
-    // const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
     const horoscopeTitle = document.getElementById("horoscope-title");
     horoscopeTitle.textContent = selectedSign;
 
@@ -20,28 +12,28 @@ function startApplication() {
 }
 
 function callGiphyAPI() {
-    const offset = 1;
-    const gifURL = `https://api.giphy.com/v1/gifs/search?api_key=PBjbldrcJfkATLfhbj07XguuikPsv0qv&q=${selectedSign}&limit=1&offset=${offset}&rating=g`;
+    const offset = randomOffset();
+    const updatedSign = `${selectedSign}%20zodiac%20sign`
+    const gifURL = `https://api.giphy.com/v1/gifs/search?api_key=PBjbldrcJfkATLfhbj07XguuikPsv0qv&q=${updatedSign}&limit=1&offset=${offset}&rating=g`;
     fetch(gifURL)
     .then(response => response.json())
     .then(gifData => {
-        // console.log('GIF:', gifData);
-
         // Get the reference to the gif-container div
         const gifContainer = document.getElementById("gif-container");
-
         // Set the src attribute of the image to the GIF URL from the Giphy API
         gifContainer.src = gifData.data[0].images.original.url;
-
-
     })
     .catch(error => console.error('Error fetching GIF:', error));
 
-document.querySelector('.header').style.display = "none"
+document.querySelector('.header').style.display = "none";
+document.querySelector("main").style.display = "none";
 };
 
 /* function for random offset */
-
+function randomOffset() {
+  const random = Math.floor(Math.random() * 49);
+  return random;
+};
 
 //
 
@@ -63,8 +55,7 @@ function callHoroscopeAPI(selectedTimeFrame, selectedDay) {
     fetch(corsProxyUrl + horoscopeURL)
         .then(response => response.json())
         .then(horoscopeData => {
-            console.log(horoscopeData)
-
+            console.log(horoscopeData);
             const horoscopeQuote = document.getElementById("horoscope-quote");
             const horoscopeDate = document.getElementById("horoscope-date");
             horoscopeDate.textContent = horoscopeData.data.date;
@@ -75,7 +66,6 @@ function callHoroscopeAPI(selectedTimeFrame, selectedDay) {
 };
 
 // Event listener for the "Save changes" button in the modal
-
 document.querySelector('.modal-card-foot .is-success').addEventListener('click', startApplication);
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -93,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal($modal);
         });
     }
-
+    
     // Add a click event on buttons to open a specific modal
     (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
         const modal = $trigger.dataset.target;
