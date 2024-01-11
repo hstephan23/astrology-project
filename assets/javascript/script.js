@@ -97,18 +97,14 @@ fetch(gifURL)
     // Get the reference to the gif-container div
     const gifContainer = document.getElementById("gif-container");
 
-    // Create a new image element
-    const gifImage = document.createElement("img");
-
     // Set the src attribute of the image to the GIF URL from the Giphy API
-    gifImage.src = gifData.data[0].images.original.url;
+    gifContainer.src = gifData.data[0].images.original.url;
 
-    // Append the image to the gif-container div
-    gifContainer.appendChild(gifImage);
 })
 .catch(error => console.error('Error fetching GIF:', error));
 
-    document.querySelector('.header').style.display = "none"
+document.querySelector('.header').style.display = "none";
+
 })
 
 
