@@ -67,14 +67,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const horoscopeURL = `https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${selectedTimeFrame}?sign=${selectedSign}&day=${selectedDay}`;
     const gifURL = `https://api.giphy.com/v1/gifs/search?api_key=PBjbldrcJfkATLfhbj07XguuikPsv0qv&q=${selectedSign}&limit=1&offset=${offset}&rating=g`;
     const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
-
-    fetch(corsProxyUrl + horoscopeURL)
-  .then(response => response.json())
-  .then(data => {console.log(data)
-    const horoscopeQuote = document.getElementById("horoscope-quote")
-    console.log(horoscopeQuote);
-    horoscopeQuote.textContent = data.data.horoscope_data;})
-  .catch(error => console.error(error));
+    const horoscopeTitle = document.getElementById("horoscope-title");
+    horoscopeTitle.textContent = selectedSign;
+    //add back corsProxyUrl
+  fetch(horoscopeURL)
+    .then(response => response.json())
+    .then(horoscopeData => {console.log(horoscopeData)
+      const horoscopeQuote = document.getElementById("horoscope-quote");
+      const horoscopeDate = document.getElementById("horoscope-date");
+      horoscopeDate.textContent = horoscopeData.data.date;
+      console.log(horoscopeQuote);
+      horoscopeQuote.textContent = horoscopeData.data.horoscope_data;})
+    .catch(error => console.error(error));
 
 // fetch(horoscopeURL)
 //     .then(response => response.json())
