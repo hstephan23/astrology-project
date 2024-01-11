@@ -40,6 +40,20 @@ function callGiphyAPI() {
 document.querySelector('.header').style.display = "none"
 };
 
+/* function for random offset */
+
+
+//
+
+/* function for randomization button */
+
+
+//
+
+/* function for showing correct options */
+
+
+//
 
 /* Horoscope API */
 function callHoroscopeAPI(selectedTimeFrame, selectedDay) {
