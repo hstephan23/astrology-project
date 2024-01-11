@@ -70,7 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fetch(corsProxyUrl + horoscopeURL)
   .then(response => response.json())
-  .then(data => console.log(data))
+  .then(data => {console.log(data)
+    const horoscopeQuote = document.getElementById("horoscope-quote")
+    console.log(horoscopeQuote);
+    horoscopeQuote.textContent = data.data.horoscope_data;})
   .catch(error => console.error(error));
 
 // fetch(horoscopeURL)
@@ -79,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
 //         console.log(data);
 //     })
 //     .catch(error => console.error('Error fetching Horoscope:', error));
+
 
 
 // return fetch(corsProxyUrl + gifURL);
