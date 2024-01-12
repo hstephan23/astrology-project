@@ -18,7 +18,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    /* height: 100%; */
+    height: 100%;
     object-fit: cover; 
     z-index: -1;
     opacity: 50%;
@@ -29,7 +29,10 @@ ul, ul li {
     color: black;
 }
 
-.js-modal-trigger:hover {
+.js-modal-trigger:hover, 
+#random-button:hover,
+#display-gifs:hover,
+#home:hover {
     background-color: rgb(171, 118, 171);
     border: solid 2px;
     border-radius: 5px;
@@ -68,4 +71,8 @@ ul, ul li {
     height: 300px;
 }
 
-
+/* change only on correct screen sizes
+/* .modal-card-title {
+    font-size: 13px;
+    font-weight: bold;
+} */
