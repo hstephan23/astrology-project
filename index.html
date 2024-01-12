@@ -166,6 +166,7 @@
                 <div class="row">
                     <label>Zodiac Sign: </label>
                     <select name="zodiac-sign">
+                        <option selected disabled>Choose One</option>
                         <option value="cancer">Cancer</option>
                         <option value="libra">Libra</option>
                         <option value="aries">Aries</option>
@@ -181,34 +182,40 @@
                     </select>
                 </div>
             <div class="row">
-            <label>Select a day:</label>
-            <select class="is-flex-direction-column" name="day">
-                <option value="today">Today</option>
-                <option value="tomorrow">Tomorrow</option>
-                <option value="yesterday">Yesterday</option>
-            </select>
-            </div>
-            <div class="row">
             <label>Monthly, weekly, or daily?</label>
-            <select class="is-flex-direction-column" name="time-frame">
+            <select class="is-flex-direction-column" name="time-frame" id="time">
+                <option selected disabled>Choose One</option>
                 <option value="monthly">Monthly</option>
                 <option value="weekly">Weekly</option>
                 <option value="daily">Daily</option>
             </select>
             </div>
+            <div class="row is-hidden" id="daily">
+                <label>Select a day:</label>
+                <select class="is-flex-direction-column" name="day">
+                    <option selected disabled>Choose One</option>
+                    <option value="yesterday">Yesterday</option>
+                    <option value="today">Today</option>
+                    <option value="tomorrow">Tomorrow</option>
+                </select>
+                </div>
           </div>
           </section>
           <footer class="modal-card-foot">
-            <button class="button is-success">Save changes</button>
+            <button class="button is-success">Find My Quote!</button>
             <button class="button">Cancel</button>
           </footer>
         </div>
       </div>
-      <h1 id="horoscope-title"></h1>
-      <img id="gif-container"></img>
-      <section id="horoscope-container">
+      <h1 id="horoscope-title" class="is-hidden"></h1>
+      <img id="gif-container" class="is-hidden"></img>
+      <section id="horoscope-container" class="is-hidden">
         <h3 id="horoscope-date"></h3>
         <p id="horoscope-quote"></p>
+        <button id="random-button">Find a new Gif!</button>
+        <button id="display-gifs">Display previous Gifs?</button>
+        <button id="home">Return Home</button>
       </section>
+      <section id="previous-gifs"></section>
 </body>
 </html>
