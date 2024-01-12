@@ -5,7 +5,7 @@
 .title {
     font-family: 'Instrument Serif', serif;
     display: flex;
-    color: hsla(0, 0%, 0%, 0.311);
+    color: black;
     font-size: 70px;
     justify-content: center;
     padding-top: 20px;
@@ -25,5 +25,47 @@
 
 }
 
+ul, ul li {
+    color: black;
+}
+
+.js-modal-trigger:hover {
+    background-color: rgb(171, 118, 171);
+    border: solid 2px;
+    border-radius: 5px;
+}
+
+.gif-page {
+    text-align: center;
+
+}
+
+#horoscope-quote {
+    margin: 0% 10% 0% 10%;
+    color: black;
+    font-size: 24px;
+    font-family: 'Instrument Serif', serif;
+}
+
+#horoscope-title {
+    font-family: 'Instrument Serif', serif;
+    font-family: 'Rubik Doodle Shadow', system-ui;
+    font-size: 70px;
+}
+
+#horoscope-date {
+    color: black;
+    font-size: 40px;
+    font-family: 'Instrument Serif', serif;
+}
+
+#gif-container {
+    height: 400px;
+    width: auto;
+}
+
+.previousGif {
+    height: 300px;
+}
 
 
