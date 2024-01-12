@@ -118,12 +118,12 @@ function showDaily() {
 
 /* Horoscope API */
 function callHoroscopeAPI(selectedTimeFrame, selectedDay) {
-    // const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
     let horoscopeURL = `https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${selectedTimeFrame}?sign=${selectedSign}&day=${selectedDay}`;
     if (selectedTimeFrame === "monthly" || selectedTimeFrame === "weekly") {
       horoscopeURL = `https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${selectedTimeFrame}?sign=${selectedSign}`;
     };
-    fetch(horoscopeURL)
+    fetch(corsProxyUrl + horoscopeURL)
         .then(response => response.json())
         .then(horoscopeData => {
             const horoscopeQuote = document.getElementById("horoscope-quote");
