@@ -37,6 +37,7 @@ function callGiphyAPI() {
 function returnHome() {
   headerEl.classList.remove("is-hidden");
   mainEl.classList.remove("is-hidden");
+  mainEl.setAttribute("class", "mt-5 ml-3 mr-3");
   gifBtns.setAttribute("class", "is-hidden");
   horoscopeTitle.setAttribute("class", "is-hidden");
   gifContainer.setAttribute("class", "is-hidden");
@@ -123,7 +124,7 @@ function callHoroscopeAPI(selectedTimeFrame, selectedDay) {
     if (selectedTimeFrame === "monthly" || selectedTimeFrame === "weekly") {
       horoscopeURL = `https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${selectedTimeFrame}?sign=${selectedSign}`;
     };
-    fetch(corsProxyUrl + horoscopeURL)
+    fetch(horoscopeURL)
         .then(response => response.json())
         .then(horoscopeData => {
             const horoscopeQuote = document.getElementById("horoscope-quote");
