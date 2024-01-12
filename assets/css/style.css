@@ -1,3 +1,15 @@
 .center {
     text-align: center;
 }
+
+.title {
+    font-family: 'Instrument Serif', serif;
+    display: flex;
+    color: white;
+    font-size: 70px;
+    justify-content: center;
+    padding-top: 20px;
+  
+}
+
+
