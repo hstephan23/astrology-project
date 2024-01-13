@@ -7,31 +7,59 @@ const headerEl = document.querySelector('header');
 const mainEl = document.querySelector('main');
 const horoscopeTitle = document.querySelector("#horoscope-title");
 const gifContainer = document.querySelector("#gif-container");
+const alertBox = document.querySelector("#alert-box");
+const alertTitle = document.querySelector("#alert-title");
+const alertBtn = document.querySelector("#alert-button");
 
 function startApplication() {
-    selectedSign = document.querySelector('#horoscope-modal select[name="zodiac-sign"]').value;
-    const selectedDay = document.querySelector('#horoscope-modal select[name="day"]').value;
-    const selectedTimeFrame = document.querySelector('#horoscope-modal select[name="time-frame"]').value;
+  selectedSign = document.querySelector('#horoscope-modal select[name="zodiac-sign"]').value;
+  const selectedDay = document.querySelector('#horoscope-modal select[name="day"]').value;
+  const selectedTimeFrame = document.querySelector('#horoscope-modal select[name="time-frame"]').value;
+  if (selectedSign && selectedTimeFrame === "daily" && selectedDay) {
     horoscopeTitle.textContent = selectedSign;
     callHoroscopeAPI(selectedTimeFrame, selectedDay);
     callGiphyAPI();
     removeHeading();
     gifBtns.classList.remove("is-hidden");
+  } else if (selectedSign && selectedTimeFrame === "daily" && !selectedDay) {
+    displayErrorBox();
+  } else if (selectedSign && selectedTimeFrame) {
+    horoscopeTitle.textContent = selectedSign;
+    callHoroscopeAPI(selectedTimeFrame, selectedDay);
+    callGiphyAPI();
+    removeHeading();
+    gifBtns.classList.remove("is-hidden");
+  } else {
+    displayErrorBox();
+  }
 }
 
+//function to use the giphy api
 function callGiphyAPI() {
-    const offset = randomOffset();
-    const updatedSign = `${selectedSign}%20zodiac%20sign`
-    const gifURL = `https://api.giphy.com/v1/gifs/search?api_key=PBjbldrcJfkATLfhbj07XguuikPsv0qv&q=${updatedSign}&limit=1&offset=${offset}&rating=g`;
-    fetch(gifURL)
-    .then(response => response.json())
-    .then(gifData => {
-        // Set the src attribute of the image to the GIF URL from the Giphy API
-        gifContainer.src = gifData.data[0].images.original.url;
-        accessLocalStorage(gifData.data[0].images.original.url);
-    })
-    .catch(error => console.error('Error fetching GIF:', error));
+  const offset = randomOffset();
+  const updatedSign = `${selectedSign}%20zodiac%20sign`
+  const gifURL = `https://api.giphy.com/v1/gifs/search?api_key=PBjbldrcJfkATLfhbj07XguuikPsv0qv&q=${updatedSign}&limit=1&offset=${offset}&rating=g`;
+  fetch(gifURL)
+  .then(response => response.json())
+  .then(gifData => {
+      // Set the src attribute of the image to the GIF URL from the Giphy API
+      gifContainer.setAttribute("alt", `${selectedSign} zodiac sign gif`);
+      gifContainer.src = gifData.data[0].images.original.url;
+      accessLocalStorage(gifData.data[0].images.original.url);
+  })
+  .catch(error => console.error('Error fetching GIF:', error));
 };
+
+//function to display an error box if no options are selected 
+function displayErrorBox() {
+  alertBox.classList.remove("is-hidden");
+  alertBox.setAttribute("class", "display-alert-box")
+}
+
+//function to remove the error box
+function removeAlert() {
+  alertBox.setAttribute("class", "is-hidden");
+}
 
 //function to make things go back to home
 function returnHome() {
@@ -72,6 +100,16 @@ function accessLocalStorage(url) {
     gifsArray.push(url)
     localStorage.setItem("gifs", JSON.stringify(gifsArray));
   }
+}
+
+//function to reset the selected
+function resetSelected() {
+  const setSign = document.querySelector('#horoscope-modal select[name="zodiac-sign"]');
+  const setDay = document.querySelector('#horoscope-modal select[name="day"]');
+  const setTimeFrame = document.querySelector('#horoscope-modal select[name="time-frame"]');
+  setSign.selectedIndex = 0;
+  setDay.selectedIndex = 0;
+  setTimeFrame.selectedIndex = 0
 }
 
 //function to display gifs
@@ -115,11 +153,8 @@ function showDaily() {
   };
 };
 
-//
-
 /* Horoscope API */
 function callHoroscopeAPI(selectedTimeFrame, selectedDay) {
-    const corsProxyUrl = 'https://cors-anywhere.herokuapp.com/';
     let horoscopeURL = `https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${selectedTimeFrame}?sign=${selectedSign}&day=${selectedDay}`;
     if (selectedTimeFrame === "monthly" || selectedTimeFrame === "weekly") {
       horoscopeURL = `https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${selectedTimeFrame}?sign=${selectedSign}`;
@@ -158,6 +193,9 @@ randomBtn.addEventListener('click', callGiphyAPI);
 // Event listener for the previous gifs button
 previousGifsBtn.addEventListener('click', displayGifs);
 
+// Event listener for the overlay button
+alertBtn.addEventListener("click", removeAlert);
+
 document.addEventListener('DOMContentLoaded', () => {
     // Functions to open and close a modal
     function openModal($el) {
@@ -188,14 +226,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const $target = $close.closest('.modal');
 
         $close.addEventListener('click', () => {
-            closeModal($target);
+          resetSelected()
+          closeModal($target);
         });
     });
 
     // Add a keyboard event to close all modals
     document.addEventListener('keydown', (event) => {
         if (event.code === 'Escape') {
-            closeAllModals();
+          resetSelected();
+          closeAllModals();
         }
     });
 });
