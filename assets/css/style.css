@@ -70,6 +70,7 @@ ul, ul li {
 
 .previousGif {
     height: 300px;
+    padding: 7px;
 }
 
 .display-alert-box {
@@ -98,6 +99,25 @@ ul, ul li {
     text-align: center;
 }
 
-.modal-card-head {
-    word-wrap: break-word;
+/* Media Query for iPhone Max */
+@media screen and (max-width: 430px) {
+
+    #gif-container {
+        height: 220px;
+        width: auto;
+}
+
+.previousGif {
+    width: 80%;
+    height: 10%;
+}
+
+#horoscope-quote {
+    font-size: 20px;
+}
+
+#horoscope-title {
+    font-size: 60px;
+}
+
 }
