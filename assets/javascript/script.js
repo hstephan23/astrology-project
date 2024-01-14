@@ -155,9 +155,9 @@ function showDaily() {
 
 /* Horoscope API */
 function callHoroscopeAPI(selectedTimeFrame, selectedDay) {
-    let horoscopeURL = `https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${selectedTimeFrame}?sign=${selectedSign}&day=${selectedDay}`;
+    let horoscopeURL = `https://corsproxy.io/?https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${selectedTimeFrame}?sign=${selectedSign}&day=${selectedDay}`;
     if (selectedTimeFrame === "monthly" || selectedTimeFrame === "weekly") {
-      horoscopeURL = `https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${selectedTimeFrame}?sign=${selectedSign}`;
+      horoscopeURL = `https://corsproxy.io/?https://horoscope-app-api.vercel.app/api/v1/get-horoscope/${selectedTimeFrame}?sign=${selectedSign}`;
     };
     fetch(horoscopeURL)
         .then(response => response.json())
