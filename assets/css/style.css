@@ -1,5 +1,5 @@
 * {
-    min-width: 250px;
+    min-width: 250px !important;
 }
 
 .center {
@@ -104,13 +104,11 @@ ul, ul li {
     text-align: center;
 }
 
-.custom-delete {
-    width: 10px;
-}
-
 /* Media Query for iPhone Max */
 @media screen and (max-width: 430px) {
-
+    .title {
+        font-size: 60px;
+    }
     #gif-container {
         height: 220px;
         width: auto;
