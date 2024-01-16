@@ -99,6 +99,10 @@ ul, ul li {
     text-align: center;
 }
 
+.custom-delete {
+    width: 10px;
+}
+
 /* Media Query for iPhone Max */
 @media screen and (max-width: 430px) {
 
